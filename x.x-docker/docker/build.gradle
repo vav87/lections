@@ -1,0 +1,36 @@
+plugins {
+    id 'java'
+    id 'com.google.cloud.tools.jib' version '2.5.0'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ru.dhabits.Main'
+    }
+}
+
+jib {
+    from {
+        image = 'openjdk'
+    }
+    to {
+        image = 'dgradle'
+        tags = [version, 'latest']
+    }
+    container {
+        ports = ['8080']
+        args = ['']
+    }
+}
+
+
+group 'ru.dhabits'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}
