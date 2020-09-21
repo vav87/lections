@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id "io.swagger.core.v3.swagger-gradle-plugin" version "2.1.4" apply false
+    id 'java-library'
+}
+
+group 'ru.dhabits'
+version '1.0'
+
+subprojects {
+    apply plugin: 'java'
+    apply plugin: 'java-library'
+
+    repositories {
+        mavenCentral()
+    }
+
+    dependencies {
+        testImplementation "junit:junit:$junitVersion"
+    }
+
+    project(':Impl') {
+        apply plugin: 'io.swagger.core.v3.swagger-gradle-plugin'
+    }
+}
+
+

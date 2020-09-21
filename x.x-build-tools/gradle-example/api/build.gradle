@@ -1,0 +1,11 @@
+archivesBaseName = 'simple-api'
+
+version '1.0-SNAPSHOT'
+
+dependencies {
+    api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.2'
+}
+
+task hello {
+    print "It is API"
+}
