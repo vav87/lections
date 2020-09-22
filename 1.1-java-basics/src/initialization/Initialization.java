@@ -3,34 +3,21 @@ package initialization;
 public class Initialization {
 
     public static void main(String[] args) {
-        new Child(); // 123456
+        new Person();
     }
 }
 
-class Parent {
+class Person {
+
+    Person() {
+        System.out.println("constructor");
+    }
+
     static {
-        System.out.print("1");
+        System.out.println("static block");
     }
 
     {
-        System.out.print("3");
-    }
-
-    Parent() {
-        System.out.print("4");
-    }
-}
-
-class Child extends Parent {
-    static {
-        System.out.print("2");
-    }
-
-    {
-        System.out.print("5");
-    }
-
-    Child() {
-        System.out.print("6");
+        System.out.println("non static block");
     }
 }
