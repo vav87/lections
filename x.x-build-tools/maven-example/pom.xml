@@ -17,6 +17,7 @@
 
 
     <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <exec-maven-plugin.version>1.5.0</exec-maven-plugin.version>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
@@ -53,16 +54,25 @@
             <properties>
                 <frontend.build.executable>npm</frontend.build.executable>
                 <frontend.build.argument1>run</frontend.build.argument1>
-                <frontend.build.argument2>build</frontend.build.argument2>
             </properties>
         </profile>
     </profiles>
 
+    <dependencies>
+        <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.7.0</version>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
 
     <build>
-        <finalName>pa#${project.artifactId}</finalName>
+        <finalName>app#${project.artifactId}</finalName>
         <plugins>
-            <plugin>
+            <!-- <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${exec-maven-plugin.version}</version>
@@ -82,7 +92,7 @@
                     </arguments>
                     <workingDirectory>${project.basedir}</workingDirectory>
                 </configuration>
-            </plugin>
+            </plugin> -->
         </plugins>
     </build>
 

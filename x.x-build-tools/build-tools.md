@@ -17,6 +17,19 @@
 ...
 </project>
 ```
+
+Порядок поиска артефактов в репозитории:
+* local (то что хранится на локально машине в .m2)
+* organization repos (те, что прописаны в секции repository) 
+* public (mavenCentral)
+
+Основные команды жизненного цикла сборки:
+* clean - очистка директории таргет со скомпилированными файлами
+* package - создание jar файла
+* compile - компиляция исходников в папке таргет
+* install - создание jar файла и сохранение его в local репозитории (.m2)
+* deploy - создание jar-файла и пуш его в удаленный репозиторий
+
 У мавена тоже есть свой враппер, но он преследуюет другие цели, не как грэдл -
 он больше про то, что как прописать все источники зависимостей на вашей машине. 
 
@@ -89,7 +102,7 @@ mvn dependency:list //просто списком
           <artifactId>Project-B</artifactId>
         </exclusion>
       </exclusions> 
-    </dependency>
+</dependency>
 ``` 
 
 Также в Maven есть такая штука, как `Dependency Management`, которая позволяет описать те версии, 
@@ -177,7 +190,8 @@ task hello {
 ## Практика 
 _Опционально:_ 
 
-Написать свой плагин/таску в обоих сборщиках для вывода в лог информации о коммите. 
+Написать свой плагин/таску в обоих сборщиках для вывода в лог информации о коммите (commit sha). 
 ## Ссылки
 [Отличное объяснения скоупов Gradle на stackoverflow.com (в картинках)](https://stackoverflow.com/questions/44493378/whats-the-difference-between-implementation-and-compile-in-gradle)
+
 [Список всех зависимостей, что тянет Spring Boot](https://repo1.maven.org/maven2/org/springframework/boot/spring-boot-dependencies/2.2.1.RELEASE/spring-boot-dependencies-2.2.1.RELEASE.pom)
