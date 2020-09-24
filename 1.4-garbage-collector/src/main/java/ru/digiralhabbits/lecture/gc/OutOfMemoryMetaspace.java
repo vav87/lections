@@ -1,4 +1,4 @@
-package ru.digiralhabbits.lecture.gc;
+package main.java.ru.digiralhabbits.lecture.gc;
 
 import java.io.File;
 import java.lang.reflect.Method;

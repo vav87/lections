@@ -1,4 +1,4 @@
-package ru.digiralhabbits.lecture.gc;
+package main.java.ru.digiralhabbits.lecture.gc;
 
 public class Stackoverflow {
     private static int counter = 0;

@@ -1,4 +1,4 @@
-package ru.digiralhabbits.lecture.gc;
+package main.java.ru.digiralhabbits.lecture.gc;
 
 public class OutOfMemoryHeapSpace {
     public static void main(String[] args) {

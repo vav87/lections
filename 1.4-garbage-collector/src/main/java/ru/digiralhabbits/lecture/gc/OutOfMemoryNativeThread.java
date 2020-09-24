@@ -1,4 +1,4 @@
-package ru.digiralhabbits.lecture.gc;
+package main.java.ru.digiralhabbits.lecture.gc;
 
 import static java.util.stream.IntStream.range;
 
