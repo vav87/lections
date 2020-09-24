@@ -1,0 +1,8 @@
+apply plugin: "base"
+
+task copyPlugin(type: Copy) {
+    from file("$buildDir/libs/${project.name}.jar")
+    into file("$rootDir/plugins/")
+}
+
+build.dependsOn(copyPlugin)

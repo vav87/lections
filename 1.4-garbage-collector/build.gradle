@@ -1,0 +1,10 @@
+allprojects { ->
+    apply plugin: "java"
+
+    sourceCompatibility = 1.11
+    targetCompatibility = 1.11
+
+    jar {
+        archiveFileName = "${project.name}.jar"
+    }
+}
