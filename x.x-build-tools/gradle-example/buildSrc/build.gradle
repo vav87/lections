@@ -1,0 +1,14 @@
+plugins {
+    id 'java'
+}
+
+group 'ru.dhabits'
+version '1.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation gradleApi()
+}

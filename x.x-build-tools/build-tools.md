@@ -179,11 +179,30 @@ https://docs.gradle.org/current/userguide/java_library_plugin.html
 В файле `gradle.properties` также можно указывать различные параметры для запуска Java приложения. 
 Например, размер heap: `org.gradle.jvmargs=-Xmx4096m`
 
+В gradle также можно делать профили как и в мавен:
+```groovy
+if (project.hasProperty('env') && project.getProperty('env') == 'prod') {
+    apply from: 'gradle/production.gradle'
+} else {
+    apply from: 'gradle/development.gradle'
+}
+```
+
+Запускаем потом это так:
+```groovy
+gradlew -Penv=prod build
+```
+
 Один из очевидных плюсов gradle - это возможность писать свои таски и плагины.
 Пример простой таски в build скрипте:
 ```groovy
-task hello {
-    print "It is API"
+task printProjectName {
+    dependsOn build
+    group 'custom tasks'
+    description 'Just print project name'
+    doLast {
+        print 'Project module:' + archivesBaseName
+    }
 }
 ```
 

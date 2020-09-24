@@ -6,6 +6,15 @@ dependencies {
     api group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.10.2'
 }
 
-task hello {
-    print "It is API"
+task printProjectName {
+    dependsOn build
+    group 'custom tasks'
+    description 'Just print project name'
+    doLast {
+        print 'Project module:' + archivesBaseName
+    }
+}
+
+task printProjectName2(type: ru.dhabits.PrintTask) {
+   to = archivesBaseName
 }
