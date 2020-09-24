@@ -17,6 +17,104 @@
 С точки зрения Java-разработчика - любое приложение стартует процесс с единственным main-потоком. С точки зрения JVM - кроме main-потока запускаются еще несколько "сервисных" потоков - для управления памятью и сигналами.
 
 
+## Создание потоков 
+
+1. Используя класс `Thread` можно создать объект потока и непосредственно управлять его выполнением через методы класса.
+1. Используя дополнительные возможсности в виде сервисов-исполнителей (executors) - можно отправлять задачи на выполнение для автоматического запуска в зависимости от конфигурации исполнителей.
+
+### Определение и запуск потока
+
+#### Имплементировать `Runnable` интерфейс
+
+```java
+public class DigitalHabits implements Runnable {
+    public void run() {
+        System.out.println("I'm from a thread");
+    }
+
+    public static void main(String args[]) {
+        (new Thread(new DigitalHabits())).start();
+        System.out.println("I'm from the main thread.");
+    }
+}
+```
+
+#### Расширить `Thread` класс
+
+```java
+public class DigitalHabits extends Thread {
+
+    @Override
+    public void run() {
+        System.out.println("I'm from a thread");
+    }
+
+    public static void main(String args[]) {
+        (new DigitalHabits()).start();
+        System.out.println("I'm from the main thread.");
+    }
+}
+```
+
+#### implements `Runnable` vs extends `Thread`
+
+Вариант имплементации интерфейса `Runnable` - более гибкий, т.к. позволяет делать запускаемыми любые классы и более гибко решать задачи асинхронного запуска в больших системах. Вариант с наследованием от класса `Thread` - вполне годится для небольших задач и простых приложений где не требуется низкая связность и не предполагается длительного цикла разработки.
+
+
+## `Thread.sleep`
+
+Метод `Thread.sleep` переводит текущий поток в состояние ожидания. Это позвляет другим потокам работать. `sleep` так же может быть прерван исключением `InterruptedException` в случае если другой поток прервет текущий поток в сосотянии сна. `sleep` не гарантирует точного времени сна, поэтому не годится для измерения временных интервалов - точное время нахождения потока в сосотянии ожидания зависит от реализации в операционной системе.
+
+## Прерывания
+
+Прерывания возникают когда один поток вызывает метод `interrupt()` другого потока. Корректная обработка прерываний - это целиком на совести разработчика. Для коротких задач нет смысла добавлять обработку прерывания. Для длинных задач (например, с использованием бесконечного цикла) обработка прерывания позволяет корректно завершить задачу, например закрыть закрывать, закоммитить транзакцию, отправить сообщение и т.д.
+
+Для корректной обработки поток периодически должен проверять статус флага прерывания статическим методом `Thread.interrupted()` или `currentThread().isInterrupted()`. Первый проверяет флаг и сбрасывает его в false. Второй только проверяет, но не сбрасывает.
+
+```java
+public class DigitalHabits implements Runnable {
+
+    public void run() {
+        //start of work - open files, open transactions, etc
+        while (true) {
+            //do bit of work
+            if (Thread.interrupted()) {
+                System.out.println("I'm interrupted.");
+                //do something to complete work - close files, commit transactions, etc
+                break;
+            }
+        }
+    }
+}
+```
+
+## `join()`
+
+Чтоб дождаться завершения выполнения другого потока, мы можем вызвать его метод `join()`. В этом случае текущий поток прервется до тех пор, пока не выполнится другой. `join()` так же перегружен и позволяет вызвать его с параметром типа `long` чтоб ограничить время ожидания определенным количеством милисекунд. После этого мы можем проверить завершился ли потом методом `isAlive()`. `join()` работает аналогично `sleep()` и может быть прерван исключением `InterruptedException`.
+
+```java
+public class Main {
+    public static void main(String args[]) throws InterruptedException {
+        Thread thread = new Thread(new DigitalHabits());
+        thread.start();
+
+        System.out.println("Main  : Waiting for thread for 2 sec");
+        thread.join(2000);
+        if (thread.isAlive()) {
+            System.out.println("Main  : thread is alive. waiting for completion");
+            thread.join();
+            if (thread.isAlive()) {
+                throw new RuntimeException("It is impossible!!!");
+            }
+        }
+        System.out.println("Main  : thread completed");
+    }
+}
+```
+
+## Синхронизция
+
+
 # Источники
 1. https://docs.oracle.com/javase/tutorial/essential/concurrency/
 1. 
