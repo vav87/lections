@@ -1,4 +1,4 @@
-package main.java.ru.digiralhabbits.lecture.gc;
+package ru.digiralhabbits.lecture.gc;
 
 import java.util.Random;
 
