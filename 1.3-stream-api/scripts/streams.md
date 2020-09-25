@@ -212,7 +212,7 @@ System.out.println(petNames); // output [Buddy, Lucy, Frankie, Rosie, Simba, Til
 * Для чего нужен flatMap и как он работает
 
 ### Задания
-???
+В презентации :3
 ## Ссылки и проч
 [Шпаргалка Java программиста 4. Java Stream API](https://habr.com/ru/company/luxoft/blog/270383/)
 
