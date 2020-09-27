@@ -364,6 +364,25 @@ public runTasks(int tasksCount, int threadsCount) {
 }
 ```
 
+## Многопоточные коллекции
+
+1. `BlockingQueue`
+1. `ConcurrentMap`
+1. `ConcurrentNavigableMap`
+
+## Простые типы с атомарными операциями
+
+Классы в пакете `java.util.concurrent.atomic` типа `AtomicInteger` и `AtomicLong` позволяют выполнять атомарные операции над переменными без использования синхронизации на более глобальном уровне.
+
+## Многопоточный `Random`
+
+Стандартная поставка `Random` хоть и является thread-safe реализацией, но может приводить к проблемам с производительностью при одновременном использовании из большого количества потоков. Во избежание этого есть реализация в области видимости потока в классе `ThreadLocalRandom`.
+
+```java
+  int r = ThreadLocalRandom.current().nextInt(1, 1000);
+```
+
+
 
 # Источники
 1. https://docs.oracle.com/javase/tutorial/essential/concurrency/
