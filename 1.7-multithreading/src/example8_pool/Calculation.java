@@ -6,6 +6,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.concurrent.Callable;
 import java.util.concurrent.ThreadLocalRandom;
 
+import static java.lang.Thread.currentThread;
+
 public class Calculation implements Callable<String> {
 
     private static ThreadLocal<MessageDigest> localDigest = ThreadLocal.withInitial(Calculation::getMd5Digest);
@@ -25,7 +27,7 @@ public class Calculation implements Callable<String> {
             bytes = md.digest();
         }
 
-        return cnt + ". " + s + ": " + bytesToHex(bytes);
+        return currentThread().getName() + " " + cnt + ". " + s + ": " + bytesToHex(bytes);
     }
 
     public String randomString() {

@@ -12,10 +12,10 @@ public class Main {
     public static void main(String[] args) throws ExecutionException, InterruptedException {
         Calendar start = Calendar.getInstance();
 
-        int threadsCount = 1;
-        int tasksCount = 10000;
+        int threadsCount = 400;
+        int tasksCount = 1000;
         List<Future<String>> futures = new ArrayList<>(tasksCount);
-        ExecutorService service = Executors.newFixedThreadPool(threadsCount);
+        ExecutorService service = Executors.newCachedThreadPool();
 
         for (int i = 0; i < tasksCount; i++) {
             futures.add(service.submit(new Calculation()));

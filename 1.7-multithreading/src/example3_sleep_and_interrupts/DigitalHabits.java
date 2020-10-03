@@ -6,7 +6,7 @@ public class DigitalHabits implements Runnable {
 
     public void run() {
         while (true) {
-            for(int i = 0; i < 500000; i++) {
+            for(int i = 0; i < 5000000; i++) {
                 if (currentThread().isInterrupted()) {
                     System.out.println("Interrupted in active work");
                     break;
@@ -18,7 +18,7 @@ public class DigitalHabits implements Runnable {
             System.out.print('.');
 
             try {
-                Thread.sleep(50);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 System.out.println("Interrupted in waiting mode");
                 break;
