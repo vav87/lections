@@ -72,7 +72,7 @@
     <build>
         <finalName>app#${project.artifactId}</finalName>
         <plugins>
-            <!-- <plugin>
+<!--             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>${exec-maven-plugin.version}</version>

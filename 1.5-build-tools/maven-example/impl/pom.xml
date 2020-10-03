@@ -16,7 +16,7 @@
     <dependencies>
         <dependency>
             <groupId>ru.dhabits</groupId>
-            <artifactId>api</artifactId>
+            <artifactId>client</artifactId>
             <version>1.0</version>
         </dependency>
 
