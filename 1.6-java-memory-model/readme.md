@@ -1,10 +1,13 @@
 # Модель памяти Java (Java Memory Model)
 
+Модель памяти Java (Java Memory Model) описывает поведение программы в многопоточной среде. 
+Она объясняет возможное поведение потоков и то, на что должен опираться программист, разрабатывающий приложение.
+
 ## Atomicity
 
 Для всех базовых типов, кроме long и double:
 
-<img src="./img/atomicity.png" width=400px>
+<img src="./img/atomicity.png" width=500px>
 
 В чем проблема long и double?
  - long и double в Java не атомарны*
@@ -17,7 +20,7 @@
 - использовать ключевое слово **volatile**
 - использовать атомики (внутри уже есть volatile)
 
-<img src="./img/atomiclong.png" width=400px>
+<img src="./img/atomiclong.png" width=500px>
 
 * внутри используется volatile
 * print(t.get()) выведет либо 0, либо 1
@@ -33,7 +36,7 @@
 Но если процессор не может записать один байт, а только целое машинное слово, то запись рядом стоящего байта может быть проблематичной. 
 Если просто считать машинное слово, обновить один байт и записать обратно, то мы помешаем другому потоку.
 
-<img src="./img/word-tearing.png" width=400px>
+<img src="./img/word-tearing.png" width=500px>
 
 В Java Memory Model проблема word tearing решена (разработчик с такой проблемой сталкиваться не будет). 
 
@@ -47,7 +50,7 @@
 И наоборот, если поток на протяжении какого-то времени работает с регистрами и локальными кэшами, читая данные оттуда, 
 он может сразу не увидеть изменений, сделанных другим потоком в основную память.
 
-<img src="./img/visibility.png" width=400px>
+<img src="./img/visibility.png" width=500px>
 
 **Решение:**
 
@@ -67,7 +70,7 @@
 Вернее, с точки зрения потока, наблюдающего за выполнением операций в другом потоке, операции могут быть выполнены не в том порядке, 
 в котором они идут в исходном коде.
 
-<img src="./img/reordering.png" width=400px>
+<img src="./img/reordering.png" width=500px>
 
 **Решение:**
 
@@ -80,19 +83,19 @@ Happens-before обозначает, что если операция X связ
 
 Связь happens-before транзитивна, т.е. если X happens-before Y, а Y happens-before Z, то X happens-before Z.
 
-<img src="./img/hb.png" width=400px>
+<img src="./img/hb.png" width=500px>
 
 * В рамках одного потока любая операция happens-before любой операцией следующей за ней в исходном коде.
 
-<img src="./img/hb1.png" width=400px>
+<img src="./img/hb1.png" width=500px>
 
 * Освобождение лока (unlock) happens-before захвата того же лока (lock).
 
-<img src="./img/hb2.png" width=400px>
+<img src="./img/hb2.png" width=500px>
 
 * Выход из synhronized блока/метода happens-before вход в synhronized блок/метод на том же мониторе.
 
-<img src="./img/hb3.png" width=400px>
+<img src="./img/hb3.png" width=500px>
 
 * Запись volatile поля happens-before чтения того же самого volatile поля.
 
