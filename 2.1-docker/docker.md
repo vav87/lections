@@ -116,3 +116,14 @@ jib {
 
 
 ```
+
+## Задание 
+Сделать докер-контейнеры из сервисов `client-service` и `admin-service` связать их посредством 
+`docker-compose` файла, чтобы `admin-service` мог зарегистрировать в себе `client-service`
+Далее, связать в одном docker-compose файле 4-приложения:
+* client-service
+* admin-service
+* mongodb
+* mongo-express
+
+чтобы вся цепочка сервисов успешно работала. 

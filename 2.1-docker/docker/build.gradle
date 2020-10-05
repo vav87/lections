@@ -14,7 +14,7 @@ jib {
         image = 'openjdk'
     }
     to {
-        image = 'dgradle'
+        image = 'jib-demo'
         tags = [version, 'latest']
     }
     container {
