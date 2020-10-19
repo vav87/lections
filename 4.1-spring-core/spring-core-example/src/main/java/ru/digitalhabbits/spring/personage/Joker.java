@@ -6,7 +6,8 @@ import org.springframework.stereotype.Component;
 import ru.digitalhabbits.spring.StringWrapper;
 
 @Component
-public class Joker implements Personage {
+public class Joker
+        implements Personage {
 
     private StringWrapper message;
 
