@@ -1,0 +1,9 @@
+package ru.digitalhabbits.spring.annotations;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+@Retention(RetentionPolicy.RUNTIME)
+public @interface InjectRandomMessage {
+    int length() default 1;
+}
