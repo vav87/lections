@@ -1,6 +1,6 @@
 # Spring Core
 
-* Презентация [Spring Core](./SpringCore.pdf)
+Презентация [Spring Core](./SpringCore.pdf)
 
 ## Видео лекции
 
