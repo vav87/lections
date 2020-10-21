@@ -9,11 +9,7 @@ public final class Student {
     public Student(int id, String name, Address address) {
         this.id = id;
         this.name = name;
-        this.address = address;
-    }
-
-    public Address getAddress() {
-        return new Address(address.getCity(), address.getStreet(), address.getHouseNumber());
+        this.address = new Address(address.getCity(), address.getStreet(), address.getHouseNumber());
     }
 
     public int getId() {
@@ -22,5 +18,9 @@ public final class Student {
 
     public String getName() {
         return name;
+    }
+
+    public Address getAddress() {
+        return new Address(address.getCity(), address.getStreet(), address.getHouseNumber());
     }
 }
