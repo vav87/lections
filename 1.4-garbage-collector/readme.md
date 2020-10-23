@@ -44,6 +44,7 @@ MyWrapperObject@21f03b70 ------|   ||     String@10112222  ----------
                                     || ...                     ||
                                     }}=========================||
 ```
+<img src="./images/mem.png" width=500px>
 
 ## OutOfMemoryError и StackOverflowError 
 При работе с памятью в Java мы обычно сталкиваемся с ошибками OutOfMemoryError.
