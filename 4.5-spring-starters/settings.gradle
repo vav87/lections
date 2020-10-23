@@ -1,0 +1,9 @@
+rootProject.name = "lecture-spring-boot"
+
+include "refresh-context"
+include "autoconfiguration"
+include "bean-factory-post-processor"
+include "command-line-properties"
+include "lifecycle-listener-events"
+include "properties-decoder-starter"
+include "simple-application"

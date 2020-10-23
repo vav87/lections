@@ -1,0 +1,3 @@
+bootJar {
+    archiveFileName = "${project.name}.jar"
+}
