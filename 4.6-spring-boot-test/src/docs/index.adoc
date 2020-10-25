@@ -1,0 +1,38 @@
+= REST API guide
+:doctype: book
+:icons: font
+:source-highlighter: highlightjs
+:toc: left
+:toclevels: 4
+:sectlinks:
+
+
+== Users
+
+Users endpoint
+
+=== Get all users
+
+Request structure
+include::{snippets}/users/http-request.adoc[]
+
+Example response
+include::{snippets}/users/http-response.adoc[]
+
+Response fields
+include::{snippets}/users/response-fields.adoc[]
+
+
+=== Create user
+
+Request structure
+include::{snippets}/createUser/http-request.adoc[]
+
+Example response
+include::{snippets}/createUser/http-response.adoc[]
+
+Request fields
+include::{snippets}/createUser/request-fields.adoc[]
+
+Response fields
+include::{snippets}/createUser/response-fields.adoc[]
