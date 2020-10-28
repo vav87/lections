@@ -1,5 +1,3 @@
-import java.util.concurrent.atomic.AtomicLong;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -16,20 +14,15 @@ public class Main {
 class ReorderingSample {
     private volatile boolean result = false;
     private volatile boolean resultReady = false;
-    private final Object lock = new Object();
 
     void setValues() {
-        synchronized (lock) {
-            result = calculateResult();
-            resultReady = true;
-        }
+        result = calculateResult();
+        resultReady = true;
     }
 
     void checkValues() {
-        synchronized (lock) {
-            while (!resultReady) Thread.onSpinWait();
-            System.out.println(result);
-        }
+        while (!resultReady) Thread.onSpinWait();
+        System.out.println(result);
     }
 
     boolean calculateResult() {
