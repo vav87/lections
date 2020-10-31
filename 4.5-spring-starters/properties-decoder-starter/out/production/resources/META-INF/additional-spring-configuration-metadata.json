@@ -1,9 +1,0 @@
-{
-  "properties": [
-    {
-      "name": "application.info.printer.enabled",
-      "type": "java.lang.String",
-      "description": "Enable application info printer."
-    }
-  ]
-}

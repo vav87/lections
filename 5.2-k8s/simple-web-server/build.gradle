@@ -1,0 +1,68 @@
+plugins {
+    id "java"
+    id "idea"
+    id "org.asciidoctor.jvm.convert" version "3.1.0"
+    id "org.springframework.boot" version "2.3.4.RELEASE"
+    id "io.spring.dependency-management" version "1.0.9.RELEASE"
+}
+
+ext {
+    guavaVersion = "27.1-jre"
+    gsonVersion = "2.8.5"
+    lombokVersion = "1.18.2"
+    postgresContainerVersion = "1.14.3"
+
+    snippetsDir = file("build/generated-snippets")
+    htmlOutputDir = file("build/generated-docs")
+}
+
+asciidoctor {
+    dependsOn test
+    sourceDir file("src/docs")
+    sources {
+        include "index.adoc"
+    }
+    attributes = ["snippets": snippetsDir]
+    outputDir file("build/generated-docs")
+}
+
+repositories {
+    mavenCentral()
+}
+
+idea {
+    module {
+        downloadJavadoc = true
+        downloadSources = true
+    }
+}
+
+sourceCompatibility = 1.11
+targetCompatibility = 1.11
+
+test {
+    useJUnitPlatform()
+}
+
+dependencies {
+    implementation "org.springframework.boot:spring-boot-starter-web"
+    implementation "org.springframework.boot:spring-boot-starter-data-jpa"
+    implementation "org.springframework.boot:spring-boot-starter-logging"
+    implementation "org.postgresql:postgresql"
+    implementation "org.apache.commons:commons-lang3"
+    implementation "com.google.guava:guava:$guavaVersion"
+    implementation "com.google.code.gson:gson:${gsonVersion}"
+
+    compileOnly "org.projectlombok:lombok:$lombokVersion"
+    annotationProcessor "org.projectlombok:lombok:$lombokVersion"
+
+    testRuntime "com.h2database:h2"
+    testImplementation "org.springframework.boot:spring-boot-starter-test"
+    testImplementation "org.springframework.restdocs:spring-restdocs-mockmvc"
+    testImplementation "org.springframework.restdocs:spring-restdocs-asciidoctor"
+    testImplementation "org.testcontainers:postgresql:$postgresContainerVersion"
+}
+
+bootJar {
+    archiveFileName = "${project.name}.jar"
+}

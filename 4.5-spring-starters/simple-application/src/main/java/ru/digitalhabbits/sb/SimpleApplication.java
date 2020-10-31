@@ -4,9 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import ru.digitalhabbits.sb.config.service.ApplicationInfoPrinter;
+import org.springframework.context.annotation.Import;
+import ru.sb.config.ApplicationPrinterAutoconfiguration;
+import ru.sb.config.service.ApplicationInfoPrinter;
 
 @SpringBootApplication
+@Import(ApplicationPrinterAutoconfiguration.class)
 public class SimpleApplication
         implements CommandLineRunner {
 

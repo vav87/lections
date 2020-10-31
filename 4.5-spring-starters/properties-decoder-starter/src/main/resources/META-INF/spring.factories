@@ -1,2 +1,5 @@
 org.springframework.boot.env.EnvironmentPostProcessor=\
-  ru.digitalhabbits.sb.config.config.PropertyEncoderEnvironmentPostProcessor
+  ru.sb.config.PropertyEncoderEnvironmentPostProcessor
+
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+   ru.sb.config.ApplicationPrinterAutoconfiguration

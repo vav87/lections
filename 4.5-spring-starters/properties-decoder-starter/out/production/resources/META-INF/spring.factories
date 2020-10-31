@@ -1,2 +1,0 @@
-org.springframework.boot.env.EnvironmentPostProcessor=\
-  ru.digitalhabbits.sb.config.config.PropertyEncoderEnvironmentPostProcessor

@@ -1,0 +1,6 @@
+---
+# file: kubernetes.yml
+- hosts: cluster
+  order: inventory
+  roles:
+    - kubernetes
