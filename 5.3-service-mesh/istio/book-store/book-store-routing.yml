@@ -1,0 +1,25 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: book-store-vs
+spec:
+  hosts:
+    - "book-store.local"
+  gateways:
+    - book-store-gw
+  http:
+    - name: Api v2 routing
+      match:
+        - headers:
+            x-api-version:
+              exact: v2
+          uri:
+            prefix: /api/v1
+      redirect:
+        uri: /api/v2
+    - name: Api v1 default routing
+      route:
+        - destination:
+            host: book-store-service
+            port:
+              number: 8080

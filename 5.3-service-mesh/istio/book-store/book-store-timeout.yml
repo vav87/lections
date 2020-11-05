@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: book-store-vs
+spec:
+  hosts:
+    - "book-store.local"
+  gateways:
+    - book-store-gw
+  http:
+    - route:
+        - destination:
+            host: book-store-service
+            port:
+              number: 8080
+      timeout: 10ms

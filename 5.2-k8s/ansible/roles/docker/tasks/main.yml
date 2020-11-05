@@ -1,5 +1,0 @@
----
-# file: roles/docker/tasks/main.yml
-- name: Install docker
-  import_tasks: "install.yml"
-  when: "'docker-ce' not in ansible_facts.packages"

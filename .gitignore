@@ -39,5 +39,6 @@ files/
 old/
 
 *.log
+logs/
 .vagrant
 .vault_pass

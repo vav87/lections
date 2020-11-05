@@ -1,4 +1,0 @@
----
-# file: inventories/local/group_vars/all/vars.yml
-firewall:
-  enabled: false

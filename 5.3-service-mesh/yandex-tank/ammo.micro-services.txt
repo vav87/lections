@@ -1,0 +1,3 @@
+[Host: store.services.local]
+[Connection: close]
+/api/v1/store/6D2CB5A0-943C-4B96-9AA6-89EAC7BDFD2B/orders

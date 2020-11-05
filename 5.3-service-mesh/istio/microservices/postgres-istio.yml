@@ -1,0 +1,20 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: "PeerAuthentication"
+metadata:
+  name: postgres-pa
+spec:
+  selector:
+    matchLabels:
+      app: postgres
+  mtls:
+    mode: DISABLE
+---
+apiVersion: "networking.istio.io/v1alpha3"
+kind: "DestinationRule"
+metadata:
+  name: postgres-dr
+spec:
+  host: postgres-service.default.svc.cluster.local
+  trafficPolicy:
+    tls:
+      mode: DISABLE

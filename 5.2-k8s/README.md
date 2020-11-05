@@ -1,8 +1,5 @@
 # Kubernetes
 
-1. [Vagrant](vagrant)
-1. [Ansible scripts](ansible)
-
 ## Как устроен контейнер
 Виртуальные машины делят между собой физические ресурсы хоста: процессор, память, дисковое пространство, сетевые интерфейсы. 
 На каждой ВМ устанавливаем нужную ОС и запускаем приложения. Недостатком такого подхода является то,
@@ -210,8 +207,7 @@ minikube start --vm=true
 minikube -p minikube docker-env
 # включаем ingress для minikube
 minikube addons enable ingress
- 
-cd simple-web-server
+
 # собираем приложение 
 ./gradlew clean build
 # заворачиваем в docker
@@ -236,8 +232,9 @@ curl -X GET k8s-test.local/users | jq
 
 ## Пример развертывания в кластере Kubernetes
 ```shell script
+git clone git@github.com:Romanow/ansible-kubernetes.git
+cd ansible-kubernetes/vagrant
 # Запускаем 3 виртуальных машины (2 ядра, 2Гб памяти на каждую)
-cd vagrant
 # vagrant box https://app.vagrantup.com/romanow/boxes/ansible-box
 vagrant up
 # Запускаем кластер на этих машинах
@@ -248,7 +245,7 @@ scp -r ansible@192.168.52.10:~/.kube ~/
 # Проверяем что кластер поднят
 kubectl get nodes
 
-cd ../k8s
+cd ../../k8s
 # docker образы http://hub.docker.com/r/romanowalex/simple-web-server/tags
 # разворачиваем postgres
 kubectl apply -f postgres-deployment.yml
@@ -257,43 +254,8 @@ kubectl apply -f web-app-deployment.yml
 # проверяем, что все успешно запустилось
 kubectl kubectl logs -f deployment/simple-web-server
 
-
-# TODO перенести в ansible
-# Устанавливаем менеджер пакетов helm для k8s
-curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
-sudo apt-get install apt-transport-https --yes
-echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
-sudo apt-get update
-sudo apt-get install helm
-
-# Устанавливаем nginx-ingress controller (от nginx inc.)
-helm repo add nginx-stable https://helm.nginx.com/stable
-helm repo update
-helm install nginx nginx-stable/nginx-ingress
-
-# Устанавливаем 
-helm repo add bitnami https://charts.bitnami.com/bitnami
-helm repo update
-helm install metallb bitnami/metallb
-# конфигурируем MetalLB
-cat <<EOF >> metallb-cm.yml 
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  namespace: metallb-system
-  name: config
-data:
-  config: |
-    address-pools:
-    - name: default
-      protocol: layer2
-      addresses:
-      - 192.168.52.101-192.168.52.110
-EOF
-kubectl apply -f metallb-cm.yml
-
 # смотрим внешний ip для нашего сервиса
-kubectl get svc
+kubectl get svc -n nginx-ingress
 # добавляем в /etc/hosts k8s-test.local
 echo -n '192.168.52.11 k8s-test.local' | sudo tee -a /etc/hosts
 

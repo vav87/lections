@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: store-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+    - port:
+        number: 80
+        name: http
+        protocol: HTTP
+      hosts:
+        - "store.services.local"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: store-vs
+spec:
+  hosts:
+    - "store.services.local"
+  gateways:
+    - store-gateway
+  http:
+    - route:
+        - destination:
+            host: store-service
+            port:
+              number: 8480

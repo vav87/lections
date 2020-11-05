@@ -1,9 +1,0 @@
----
-# file: inventories/local/group_vars/workers/vars.yml
-firewall:
-  enabled: false
-  rules:
-    - { port: "8285", direction: "in", protocol: "udp", policy: "allow", description: "Flannel" }
-    - { port: "30000:32767", direction: "in", protocol: "tcp", policy: "allow", description: "NodePort Services" }
-    - { port: "10250", direction: "in", protocol: "tcp", policy: "allow", description: "Kubelet API" }
-    - { port: "10255", direction: "in", protocol: "tcp", policy: "allow", description: "Read-Only Kubelet API" }

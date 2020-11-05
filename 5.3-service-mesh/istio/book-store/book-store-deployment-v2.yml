@@ -1,36 +1,36 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: simple-web-server-service
+  name: book-store-service
 spec:
   selector:
-    app: simple-web-server
+    app: book-store
   ports:
     - protocol: TCP
       port: 8080
+      name: http
       targetPort: 8080
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simple-web-server
+  name: book-store-v2
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: simple-web-server
+      app: book-store
+      version: v2
   template:
     metadata:
       labels:
-        app: simple-web-server
+        app: book-store
+        version: v2
     spec:
       containers:
-        - name: simple-web-server
-          image: romanowalex/simple-web-server:v1.2
+        - name: book-store
+          image: romanowalex/book-store:v1.2-break-ping
           imagePullPolicy: Always
-          env:
-            - name: SPRING_PROFILES_ACTIVE
-              value: k8s
           ports:
             - name: web
               containerPort: 8080
