@@ -1,34 +1,37 @@
 package example;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.function.Function;
 
-import static java.util.stream.Collectors.toList;
-
 public class Examples {
     public static void main(String[] args) {
         //Пример1 Маппинг лицензий
-        var kfLicenses = List.of(new KfLicence("1", "N_1"), new KfLicence("2", "N_2"));
+        var kfLicenses = List.of(
+            new KfLicence("1", "N_1"),
+            new KfLicence("2", "N_2"));
+
         var licences = transformLicences(kfLicenses);
         System.out.println(licences);
 
     }
 
+    public static List<License> transformLicences(List<KfLicence> kfLicences) {
+        return transformList(kfLicences, Examples::mapLicence);
+    }
+
     private static <S, T> List<T> transformList(List<S> list, Function<S, T> itemTransformer) {
-        if (list == null || list.size() == 0) {
+        if (list == null || list.isEmpty()) {
             return Collections.emptyList();
         }
         return list.stream()
                 .filter(Objects::nonNull)
                 .map(itemTransformer)
                 .collect(toList());
-    }
-
-    public static List<License> transformLicences(List<KfLicence> kfLicences) {
-        return transformList(kfLicences, Examples::mapLicence);
     }
 
     private static License mapLicence(KfLicence source) {

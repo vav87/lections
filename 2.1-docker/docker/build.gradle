@@ -3,6 +3,8 @@ plugins {
     id 'com.google.cloud.tools.jib' version '2.5.0'
 }
 
+sourceCompatibility = '11'
+
 jar {
     manifest {
         attributes 'Main-Class': 'ru.dhabits.Main'

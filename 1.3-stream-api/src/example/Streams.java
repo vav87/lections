@@ -108,6 +108,12 @@ class Streams {
 //                .collect(Collectors.toList());
 //
 //        System.out.println(petNames); // output [Buddy, Lucy, Frankie, Rosie, Simba, Tilly]
+
+//    names.parallelStream()
+//        .peek(it -> System.out.printf("Thread [%s] peek: %s%n", Thread.currentThread().getName(), it))
+//        .forEach(String::toLowerCase);
+
+
     }
 
     private static class Event {

@@ -1,31 +1,33 @@
 public class Main {
 
-    public static void main(String[] args) {
-        ReorderingSample sample = new ReorderingSample();
+    public static void main(String[] args) throws InterruptedException {
+        Sample sample = new Sample();
 
-        Thread thread1 = new Thread(sample::setValues);
+        Thread thread1 = new Thread(sample);
         thread1.start();
 
-        Thread thread2 = new Thread(sample::checkValues);
+        Thread thread2 = new Thread(sample);
         thread2.start();
+
+        thread1.join();
+        thread2.join();
+
+        System.out.println(sample.value);
     }
 }
 
-class ReorderingSample {
-    private volatile boolean result = false;
-    private volatile boolean resultReady = false;
+class Sample implements Runnable {
 
-    void setValues() {
-        result = calculateResult();
-        resultReady = true;
-    }
+    public int value = 0;
+    private final Object monitor = new Object();
 
-    void checkValues() {
-        while (!resultReady) Thread.onSpinWait();
-        System.out.println(result);
-    }
-
-    boolean calculateResult() {
-        return true;
+    @Override
+    public void run() {
+        for (int i = 0; i < 1000000000; i++) {
+            synchronized (monitor) {
+                value++;
+            }
+        }
     }
 }
+
